@@ -1,6 +1,7 @@
 package teamproject2;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class OrderListUserDesign extends JDialog{
@@ -16,6 +19,7 @@ public class OrderListUserDesign extends JDialog{
 	private JTable jOrderListUserTable;
 	private DefaultTableModel dtmOrderList;
 	private OrderListUserService olus;
+	private DefaultTableCellRenderer colorRender;
 	
 	public OrderListUserDesign(int userCode) {
 		setTitle("주문 내역[사용자]");
@@ -32,9 +36,32 @@ public class OrderListUserDesign extends JDialog{
 				return false;
 			}
 		};
-		
 		jOrderListUserTable=new JTable(dtmOrderList);
 		
+		//Table 주문번호 색상 표시와 가운데 정렬을 위한 Anonymous 클래스 override 사용
+		colorRender=new DefaultTableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value,
+                    boolean isSelected, boolean hasFocus, int row, int column) {
+				JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
+				
+				//가운데 정렬
+				label.setHorizontalAlignment(SwingConstants.CENTER);
+				
+				//주문번호 열만 색깔 표시
+				if(column==0) {
+					label.setForeground(Color.BLUE);
+				} else {
+					label.setForeground(Color.BLACK);
+				}
+				return label;
+			}
+		};//DefaultTableCellRender
+		
+		for (int i = 0; i < jOrderListUserTable.getColumnCount(); i++) {
+			jOrderListUserTable.getColumnModel().getColumn(i).setCellRenderer(colorRender);
+		}
+				
 		//OrderListUserService에서 method에 메개변수를 사용자 번호로 받아서 주문 내역 가져오는 부분
 		olus=new OrderListUserService();
 		List<OrderListUserDTO> orders=olus.searchAllOrder(userCode);

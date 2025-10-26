@@ -7,6 +7,6 @@ public class RunTest {
 	
 	public static void main(String[] args) {
 //		OrderListManagerDesign olmd=new OrderListManagerDesign();
-		OrderListUserDesign olud=new OrderListUserDesign(2);
+		OrderListUserDesign olud=new OrderListUserDesign(1);
 	}
 }

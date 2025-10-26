@@ -26,9 +26,17 @@ public class OrderListManagerDesign extends JDialog{
 		jlogo.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 
 		String[] columnNames={"주문 번호", "주문 일자", "고객명", "차량 코드", "차량명", "금액", "탁송 상태"};
-		dtmOrderList=new DefaultTableModel(columnNames, 0);
+		
+		//Table 내부의 데이터 값을 수정할 수 없도록 Anonymous클래스와 override 사용
+		dtmOrderList=new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column){
+				return false;
+			}
+		};
+		
 		jOrderListManagerTable=new JTable(dtmOrderList);
-
+		
 		List<OrderListManagerDTO> orders=olms.searchAllOrder();
 		
 		for(OrderListManagerDTO olmDTO:orders) {

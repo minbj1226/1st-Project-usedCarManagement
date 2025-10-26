@@ -26,7 +26,13 @@ public class OrderListUserDesign extends JDialog{
 
 		//테이블 컬럼명 설정 
 		String[] columnNames={"주문 번호", "주문 일자", "차량 코드", "차량명", "금액", "탁송 상태"};
-		dtmOrderList=new DefaultTableModel(columnNames, 0);
+		dtmOrderList=new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
 		jOrderListUserTable=new JTable(dtmOrderList);
 		
 		//OrderListUserService에서 method에 메개변수를 사용자 번호로 받아서 주문 내역 가져오는 부분

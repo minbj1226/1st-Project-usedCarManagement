@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -66,17 +67,21 @@ public class OrderListUserDesign extends JDialog{
 		olus=new OrderListUserService();
 		List<OrderListUserDTO> orders=olus.searchAllOrder(userCode);
 		
-		for(OrderListUserDTO oluDTO:orders) {
-			Object[] rowData=new Object[6];
-			rowData[0]=oluDTO.getPayment_code();
-			rowData[1]=oluDTO.getOrder_date();
-			rowData[2]=oluDTO.getProduct_code();
-			rowData[3]=oluDTO.getProduct_name();
-			rowData[4]=String.format("%,d", oluDTO.getPrice())+"원";
-			rowData[5]=oluDTO.getDelivery_state();
-			
-			dtmOrderList.addRow(rowData);
-		}
+		if(orders==null || orders.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "주문 내역이 없습니다.");
+		} else{
+			for(OrderListUserDTO oluDTO:orders) {
+				Object[] rowData=new Object[6];
+				rowData[0]=oluDTO.getPayment_code();
+				rowData[1]=oluDTO.getOrder_date();
+				rowData[2]=oluDTO.getProduct_code();
+				rowData[3]=oluDTO.getProduct_name();
+				rowData[4]=String.format("%,d", oluDTO.getPrice())+"원";
+				rowData[5]=oluDTO.getDelivery_state();
+				
+				dtmOrderList.addRow(rowData);
+				}
+		}//end else
 				
 		JScrollPane jscrollPane=new JScrollPane(jOrderListUserTable);
 

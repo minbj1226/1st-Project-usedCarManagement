@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class RunTest {
 	
 	public static void main(String[] args) {
-//		OrderListManagerDesign olmd=new OrderListManagerDesign();
-		OrderListUserDesign olud=new OrderListUserDesign(1);
+		OrderListManagerDesign olmd=new OrderListManagerDesign();
+//		OrderListUserDesign olud=new OrderListUserDesign(4);
 	}
 }

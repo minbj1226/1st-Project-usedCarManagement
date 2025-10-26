@@ -23,7 +23,7 @@ public class OrderListUserEvent extends WindowAdapter implements WindowListener,
 		if(row!=-1 && col==0) {
 			int orderNum=(int) olud.getjOrderListUserTable().getValueAt(row, 0);
 			showOrderDetail(orderNum, row);
-		}//end if
+		}
 	}//mouseClicked
 
 	public void showOrderDetail(int payment_code, int selectedRow) {

@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,7 +21,7 @@ public class OrderListManagerDesign extends JDialog{
 	private JTable jOrderListManagerTable;
 	private DefaultTableModel dtmOrderList;
 	private OrderListManagerService olms;
-	private DefaultTableCellRenderer colorRender;
+	private DefaultTableCellRenderer managerRender;
 	
 	public OrderListManagerDesign() {
 		setTitle("주문 내역[관리자]");
@@ -41,43 +42,51 @@ public class OrderListManagerDesign extends JDialog{
 		jOrderListManagerTable=new JTable(dtmOrderList);
 		
 		//Table 주문번호 색상 표시와 가운데 정렬을 위한 Anonymous 클래스 override 사용
-		colorRender=new DefaultTableCellRenderer() {
+		managerRender=new DefaultTableCellRenderer() {
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
-				JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
-				
-				//가운데 정렬
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				
 				//주문번호 열만 색깔 표시
 				if(column==0) {
+					JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 					label.setForeground(Color.BLUE);
+					//가운데 정렬
+					label.setHorizontalAlignment(SwingConstants.CENTER);
+					return label;
 				} else {
+					JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 					label.setForeground(Color.BLACK);
-				}
-				return label;
-			}
+					//가운데 정렬
+					label.setHorizontalAlignment(SwingConstants.CENTER);
+					return label;
+				}//end else
+			}//getTableCellRenderComponent
 		};//DefaultTableCellRender
 		
 		for (int i = 0; i < jOrderListManagerTable.getColumnCount(); i++) {
-			jOrderListManagerTable.getColumnModel().getColumn(i).setCellRenderer(colorRender);
+			jOrderListManagerTable.getColumnModel().getColumn(i).setCellRenderer(managerRender);
 		}
 		
 		List<OrderListManagerDTO> orders=olms.searchAllOrder();
 		
-		for(OrderListManagerDTO olmDTO:orders) {
-			Object[] rowData=new Object[7];
-			rowData[0]=olmDTO.getPayment_code();
-			rowData[1]=olmDTO.getOrder_date();
-			rowData[2]=olmDTO.getUser_name();
-			rowData[3]=olmDTO.getProduct_code();
-			rowData[4]=olmDTO.getProduct_name();
-			rowData[5]=String.format("%,d", olmDTO.getPrice())+"원";
-			rowData[6]=olmDTO.getDelivery_state();
-			
-			dtmOrderList.addRow(rowData);
-		}
+		if(orders==null || orders.isEmpty()) {
+			Object[] emptyRow = {"-", "-", "-", "-", "등록된 주문 내역이 없습니다.", "-", "-"};
+		    dtmOrderList.addRow(emptyRow);
+		} else {
+			for(OrderListManagerDTO olmDTO:orders) {
+				Object[] rowData=new Object[7];
+				rowData[0]=olmDTO.getPayment_code();
+				rowData[1]=olmDTO.getOrder_date();
+				rowData[2]=olmDTO.getUser_name();
+				rowData[3]=olmDTO.getProduct_code();
+				rowData[4]=olmDTO.getProduct_name();
+				rowData[5]=String.format("%,d", olmDTO.getPrice())+"원";
+				rowData[6]=olmDTO.getDelivery_state();
+				
+				dtmOrderList.addRow(rowData);
+			}//end for
+		}//end else
+				
 		JScrollPane jscrollPane=new JScrollPane(jOrderListManagerTable);
 
 		add("North", jlogo);

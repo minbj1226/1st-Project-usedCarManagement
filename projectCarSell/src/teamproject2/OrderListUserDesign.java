@@ -52,6 +52,10 @@ public class OrderListUserDesign extends JDialog{
 				//주문번호 열만 색깔 표시
 				if(column==0) {
 					label.setForeground(Color.BLUE);
+					//글씨 굵기 설정
+					label.setFont(label.getFont().deriveFont(Font.BOLD));
+					//밑줄 처리
+					label.setText("<html><u>"+value.toString()+"</u></html>");
 				} else {
 					label.setForeground(Color.BLACK);
 				}

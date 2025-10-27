@@ -46,18 +46,22 @@ public class OrderListManagerDesign extends JDialog{
 			@Override
 			public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
+				JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 				//주문번호 열만 색깔 표시
 				if(column==0) {
-					JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 					label.setForeground(Color.BLUE);
 					//가운데 정렬
 					label.setHorizontalAlignment(SwingConstants.CENTER);
+					//글씨 굵기 설정
+					label.setFont(label.getFont().deriveFont(Font.BOLD));
+					//밑줄 처리
+					label.setText("<html><u>"+value.toString()+"</u></html>");
 					return label;
 				} else {
-					JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); 
 					label.setForeground(Color.BLACK);
 					//가운데 정렬
 					label.setHorizontalAlignment(SwingConstants.CENTER);
+					
 					return label;
 				}//end else
 			}//getTableCellRenderComponent
@@ -70,8 +74,7 @@ public class OrderListManagerDesign extends JDialog{
 		List<OrderListManagerDTO> orders=olms.searchAllOrder();
 		
 		if(orders==null || orders.isEmpty()) {
-			Object[] emptyRow = {"-", "-", "-", "-", "등록된 주문 내역이 없습니다.", "-", "-"};
-		    dtmOrderList.addRow(emptyRow);
+			JOptionPane.showMessageDialog(this, "주문 내역이 없습니다.");
 		} else {
 			for(OrderListManagerDTO olmDTO:orders) {
 				Object[] rowData=new Object[7];

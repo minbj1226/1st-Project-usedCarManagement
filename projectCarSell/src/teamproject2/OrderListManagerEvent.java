@@ -8,10 +8,8 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 
-
 public class OrderListManagerEvent extends WindowAdapter implements WindowListener, MouseListener {
 	private OrderListManagerDesign olmd;
-	private OrderListManagerService olms;
 	
 	public OrderListManagerEvent(OrderListManagerDesign olmd) {
 		this.olmd=olmd;

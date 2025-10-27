@@ -33,7 +33,7 @@ public class GetConnection {
 		} // end catch
 
 		// 2.로딩된 드라이버를 사용하여 커넥션 얻기
-		 File file = new File("src/properties/database.properties");
+		File file=new File("src/properties/database.properties");
 		
 		if(!file.exists()) {
 			throw new IOException("properties가 지정된 위치에 존재하지 않습니다.");

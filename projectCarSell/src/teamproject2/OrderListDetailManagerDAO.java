@@ -62,7 +62,7 @@ public class OrderListDetailManagerDAO {
 			con=gc.getCon();
 			StringBuilder selectOneOrder=new StringBuilder();
 			selectOneOrder
-			.append("		select u.user_name, u.email, u.tel, u.address,\r\n"
+			.append("		select u.name, u.email, u.tel, u.address,\r\n"
 					+ "			 o.payment_code, o.order_date, o.delivery_state,\r\n"
 					+ "			 c.price, c.car_name, c.car_year, c.distance,\r\n" 
 					+ " 		 b.brand		")
@@ -79,7 +79,7 @@ public class OrderListDetailManagerDAO {
 			
 			while(rs.next()) {
 				oldmDTO=new OrderListDetailManagerDTO();
-				oldmDTO.setName(rs.getString("user_name"));
+				oldmDTO.setName(rs.getString("name"));
 				oldmDTO.setEmail(rs.getString("email"));
 				oldmDTO.setTel(rs.getString("tel"));
 				oldmDTO.setAddress(rs.getString("address"));

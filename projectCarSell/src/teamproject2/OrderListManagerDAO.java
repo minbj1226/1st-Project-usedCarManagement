@@ -37,7 +37,7 @@ public class OrderListManagerDAO {
 		try {
 			con=gc.getCon();
 			String selectOrderAll="select o.payment_code, o.order_date, o.delivery_state,\r\n"
-					+ "			 u.user_name,\r\n"
+					+ "			 u.name,\r\n"
 					+ "			 c.product_code, c.car_name, c.price\r\n"
 					+ "from ORDER_HISTORY o\r\n"
 					+ "join car_info c on o.product_code=c.product_code\r\n"
@@ -47,7 +47,7 @@ public class OrderListManagerDAO {
 			
 			int payment_code=0; //주문 번호
 			Date order_date=null; //주문 일자
-			String user_name=null; //고객명
+			String name=null; //고객명
 			int product_code=0; //차량 코드
 			String car_name=null; //차량명
 			int price=0; //금액
@@ -57,13 +57,13 @@ public class OrderListManagerDAO {
 			while(rs.next()) {
 				payment_code=rs.getInt("payment_code");
 				order_date=rs.getDate("order_date");
-				user_name=rs.getString("user_name");
+				name=rs.getString("name");
 				product_code=rs.getInt("product_code");
 				car_name=rs.getString("car_name");
 				price=rs.getInt("price");
 				delivery_state=rs.getString("delivery_state");
 				
-				olmDTO=new OrderListManagerDTO(payment_code, price, product_code, user_name, car_name, delivery_state, order_date);
+				olmDTO=new OrderListManagerDTO(payment_code, price, product_code, name, car_name, delivery_state, order_date);
 				list.add(olmDTO);
 			}//end if
 			

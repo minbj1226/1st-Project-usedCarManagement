@@ -4,20 +4,20 @@ import java.sql.Date;
 
 public class OrderListManagerDTO {
 	private int payment_code, price, product_code; 
-	private String user_name, product_name, delivery_state;
+	private String name, product_name, delivery_state;
 	private Date order_date;
 
 	public OrderListManagerDTO() {
 		
 	}
 
-	public OrderListManagerDTO(int payment_code, int price, int product_code, String user_name, String product_name,
+	public OrderListManagerDTO(int payment_code, int price, int product_code, String name, String product_name,
 			String delivery_state, Date order_date) {
 		super();
 		this.payment_code = payment_code;
 		this.price = price;
 		this.product_code = product_code;
-		this.user_name = user_name;
+		this.name = name;
 		this.product_name = product_name;
 		this.delivery_state = delivery_state;
 		this.order_date = order_date;
@@ -35,8 +35,8 @@ public class OrderListManagerDTO {
 		return product_code;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public String getName() {
+		return name;
 	}
 
 	public String getProduct_name() {
@@ -63,8 +63,8 @@ public class OrderListManagerDTO {
 		this.product_code = product_code;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setProduct_name(String product_name) {
@@ -82,7 +82,7 @@ public class OrderListManagerDTO {
 	@Override
 	public String toString() {
 		return "OrderListManagerDTO [payment_code=" + payment_code + ", price=" + price + ", product_code="
-				+ product_code + ", user_name=" + user_name + ", product_name=" + product_name + ", delivery_state="
+				+ product_code + ", name=" + name + ", product_name=" + product_name + ", delivery_state="
 				+ delivery_state + ", order_date=" + order_date + "]";
 	}
 	

@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -29,7 +30,8 @@ public class OrderListManagerDesign extends JDialog{
 		
 		jlogo=new JLabel("쌍용중고차", JLabel.CENTER);
 		jlogo.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-
+		jlogo.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+		
 		String[] columnNames={"주문 번호", "주문 일자", "고객명", "차량 코드", "차량명", "금액", "탁송 상태"};
 		
 		//Table 내부의 데이터 값을 수정할 수 없도록 Anonymous클래스 override 사용
@@ -98,7 +100,8 @@ public class OrderListManagerDesign extends JDialog{
 		OrderListManagerEvent olme=new OrderListManagerEvent(this);
 		jOrderListManagerTable.addMouseListener(olme); //테이블을 누를때의 이벤트 리스너 추가
 		
-		setBounds(100, 100, 500, 300);
+		setBounds(100, 100, 600, 400);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}//orderlistuserdesign

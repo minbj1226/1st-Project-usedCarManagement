@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,7 +29,8 @@ public class OrderListUserDesign extends JDialog{
 		//상단 쌍용중고차 로고
 		jlogo=new JLabel("쌍용중고차", JLabel.CENTER);
 		jlogo.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-
+		jlogo.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
+		
 		//테이블 컬럼명 설정 
 		String[] columnNames={"주문 번호", "주문 일자", "차량 코드", "차량명", "금액", "탁송 상태"};
 		dtmOrderList=new DefaultTableModel(columnNames, 0) {
@@ -95,7 +97,8 @@ public class OrderListUserDesign extends JDialog{
 		OrderListUserEvent olue=new OrderListUserEvent(this);
 		jOrderListUserTable.addMouseListener(olue);
 		
-		setBounds(100, 100, 500, 300);
+		setBounds(500, 300, 600, 400);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	}//orderlistuserdesign
